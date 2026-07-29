@@ -1,0 +1,24 @@
+name: Deploy Next.js to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Ejecutar comandos de despliegue en el VPS
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: |
+            cd /var/www/html/AG-AD-01
+            git pull origin main
+            npm install
+            npm run build
+            pm2 restart mi-app-next
