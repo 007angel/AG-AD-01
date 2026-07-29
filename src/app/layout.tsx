@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="es" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
-        <header className="w-full bg-slate-900 text-white">
+        <header className="fixed inset-x-0 top-0 z-50 w-full bg-slate-900/95 text-white shadow-lg shadow-slate-950/20 backdrop-blur-lg">
           <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
             <a href="#" className="flex items-center gap-3 text-xl font-bold text-white">
               <svg className="h-8 w-8 text-amber-400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
@@ -50,7 +50,7 @@ export default function RootLayout({
           </div>
         </header>
 
-        {children}
+        <div className="pt-[88px] w-full">{children}</div>
       </body>
     </html>
   );
