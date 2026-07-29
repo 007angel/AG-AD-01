@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Aduanalya | Agencia Aduanera",
+  title: "Agencia Aduanera L & A | Agencia Aduanera",
   description: "Agencia aduanera especializada en importación, exportación y trámites internacionales.",
 };
 
