@@ -122,7 +122,7 @@ export default function Home() {
             className="h-full w-full object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-slate-950/40" />
+        <div className="absolute inset-0 bg-slate-950/55" />
       </div>
       <section className="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-20 lg:px-8 lg:py-28">
         <header className="flex flex-col gap-4 rounded-3xl border border-slate-700 bg-slate-950/80 p-8 shadow-xl shadow-slate-950/60 backdrop-blur">
@@ -148,9 +148,9 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-xl shadow-slate-200/70">
+        <section className="rounded-3xl border border-slate-700 bg-slate-950/95 p-8 shadow-xl shadow-slate-950/50">
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-cyan-200">¿Qué Hacemos?</h2>
+            <h2 className="text-3xl font-bold text-cyan-100">¿Qué Hacemos?</h2>
             <p className="mx-auto mt-3 max-w-2xl text-slate-300">
               Servicios aduanales y logísticos integrales para tu negocio
             </p>
@@ -158,22 +158,22 @@ export default function Home() {
 
           <div className="mt-10">
             <div
-              className="relative overflow-hidden rounded-3xl border border-slate-200 shadow-sm transition-shadow hover:shadow-lg"
+              className="relative overflow-hidden rounded-3xl border border-slate-700 shadow-sm shadow-slate-950/40 transition-shadow hover:shadow-lg"
               style={{
                 backgroundImage: `url(${boxes[activeIndex].image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
-              <div className="absolute inset-0 bg-slate-950/40" />
+              <div className="absolute inset-0 bg-slate-950/50" />
               <div className="relative space-y-8 p-8 text-white transition-all duration-700 ease-out">
                 <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white/20 text-3xl shadow-sm backdrop-blur-sm">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white/10 text-3xl shadow-sm backdrop-blur-sm">
                       {boxes[activeIndex].icon}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-semibold">{boxes[activeIndex].title}</h3>
+                      <h3 className="text-2xl font-semibold text-cyan-100">{boxes[activeIndex].title}</h3>
                       <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">
                         {boxes[activeIndex].description}
                       </p>
@@ -196,7 +196,7 @@ export default function Home() {
                 <ul className="mt-8 space-y-3 text-sm md:max-w-md">
                   {boxes[activeIndex].points.map((point) => (
                     <li key={point} className="flex items-start gap-3 text-slate-100">
-                      <span className="mt-1 text-emerald-300">✓</span>
+                      <span className="mt-1 text-cyan-300">✓</span>
                       <span>{point}</span>
                     </li>
                   ))}
@@ -289,25 +289,25 @@ export default function Home() {
         )}
 
         <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
-          <div className="rounded-3xl border border-slate-700 bg-slate-950/80 p-8 shadow-lg shadow-slate-950/50">
+          <div className="rounded-3xl border border-slate-700 bg-slate-950/85 p-8 shadow-lg shadow-slate-950/50">
             <h2 className="text-2xl font-semibold text-cyan-100">Nuestros servicios</h2>
-            <ul className="mt-6 space-y-3 text-slate-300">
+            <ul className="mt-6 space-y-3 text-slate-200">
               {services.map((service) => (
-                <li key={service} className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3">
-                  <span className="text-xl text-amber-600">•</span>
+                <li key={service} className="flex items-center gap-3 rounded-2xl bg-slate-800/80 px-4 py-3 text-slate-100">
+                  <span className="text-xl text-cyan-300">•</span>
                   {service}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-3xl border border-cyan-500/30 bg-slate-900/80 p-8 shadow-lg shadow-cyan-500/20">
+          <div className="rounded-3xl border border-cyan-500/30 bg-slate-900/90 p-8 shadow-lg shadow-cyan-500/20">
             <h2 className="text-2xl font-semibold text-cyan-100">¿Por qué elegirnos?</h2>
             <div className="mt-6 space-y-5">
               {highlights.map((item) => (
                 <div key={item.title}>
-                  <h3 className="font-semibold text-slate-900">{item.title}</h3>
-                  <p className="mt-1 text-sm leading-6 text-slate-700">{item.text}</p>
+                  <h3 className="font-semibold text-cyan-100">{item.title}</h3>
+                  <p className="mt-1 text-sm leading-6 text-slate-300">{item.text}</p>
                 </div>
               ))}
             </div>
