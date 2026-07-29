@@ -87,10 +87,10 @@ export default function Home() {
               </h2>
             </div>
             <a
-              href="mailto:contacto@aduanalya.com"
+              href="mailto:operaciones@agenciaaduaneralya.com"
               className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 font-semibold text-slate-900 transition hover:bg-slate-100"
             >
-              contacto@aduanalya.com
+              operaciones@agenciaaduaneralya.com
             </a>
           </div>
         </section>
