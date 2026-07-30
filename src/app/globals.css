@@ -1,17 +1,28 @@
 @import "tailwindcss";
 
-:root {
-  --background: #081523;
-  --foreground: #f8fafc;
-  --surface: #112a48;
-  --surface-soft: #16355f;
-  --surface-muted: #1e456f;
-  --accent: #1fb6ff;
-  --accent-strong: #0ca5e9;
-  --muted: #94a3b8;
+/* :root {
+  --background: #071a35;
+  --foreground: #e8eef8;
+  --surface: #5e6775;
+  --surface-soft: #14305d;
+  --surface-muted: #c6cdd4;
+  --accent: #4f8ef2;
+  --accent-strong: #3f6ed1;
+  --muted: #94a6c1;
 }
+ */
+/* :root {
+  --background: #071a35;
+  --foreground: #e8eef8;
+  --surface: #0d203f;
+  --surface-soft: #14305d;
+  --surface-muted: #1e4b80;
+  --accent: #4f8ef2;
+  --accent-strong: #3f6ed1;
+  --muted: #94a6c1;
+} */
 
-@theme inline {
+/* @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
@@ -21,7 +32,7 @@
 * {
   box-sizing: border-box;
 }
-
+ */
 html {
   scroll-behavior: smooth;
 }
@@ -29,7 +40,15 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: linear-gradient(135deg, #f8fbff 0%, #eef5ff 55%, #fdfefe 100%);
+  color: #0f172a;
+  font-family: "Inter", "Segoe UI", Arial, Helvetica, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: rgba(37, 99, 235, 0.2);
+  color: #0f172a;
 }

@@ -90,6 +90,10 @@ export default function Home() {
       return true;
     }
   });
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    if (typeof window === "undefined") return false;
+    return localStorage.getItem("theme") === "dark";
+  });
 
   const defaultVideoUrl = "/earth.mp4";
 
@@ -100,6 +104,14 @@ export default function Home() {
       // ignore
     }
   }, [useVideo]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem("theme", isDarkMode ? "dark" : "light");
+    } catch (e) {
+      // ignore
+    }
+  }, [isDarkMode]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -116,10 +128,35 @@ export default function Home() {
       // ignore write errors
     }
   }, [boxes]);
+
+  const themeStyles = {
+    main: isDarkMode
+      ? "bg-[radial-gradient(circle_at_top,_#112a57,_#07142b_55%,_#030816)] text-slate-100"
+      : "bg-[linear-gradient(135deg,_#f8fbff_0%,_#eef5ff_55%,_#fdfefe_100%)] text-slate-950",
+    cardSection: isDarkMode
+      ? "rounded-[2rem] border border-slate-700/70 bg-slate-950/90 shadow-[0_24px_60px_rgba(2,8,23,0.45)] backdrop-blur-xl"
+      : "rounded-[2rem] border border-slate-200/80 bg-white/90 shadow-[0_20px_50px_rgba(15,23,42,0.08)] backdrop-blur-xl",
+    toggleButton: isDarkMode
+      ? "inline-flex items-center justify-center rounded-full bg-sky-500 px-5 py-2 text-sm font-semibold text-slate-950 shadow-lg shadow-sky-500/20 transition duration-200 hover:bg-sky-400 focus:outline-none focus:ring-2 focus:ring-sky-400"
+      : "inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-2 text-sm font-semibold text-white shadow-lg shadow-slate-900/15 transition duration-200 hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-sky-400",
+    serviceCardWrapper: isDarkMode
+      ? "relative overflow-hidden rounded-[2rem] border border-slate-700/70 shadow-[0_16px_36px_rgba(2,8,23,0.35)] transition-shadow hover:shadow-[0_24px_50px_rgba(2,8,23,0.45)]"
+      : "relative overflow-hidden rounded-[2rem] border border-slate-200/80 shadow-[0_16px_36px_rgba(15,23,42,0.12)] transition-shadow hover:shadow-[0_24px_50px_rgba(15,23,42,0.16)]",
+    serviceOverlay: isDarkMode
+      ? "absolute inset-0 bg-[linear-gradient(135deg,rgba(2,6,23,0.86)_0%,rgba(15,23,42,0.55)_50%,rgba(2,6,23,0.82)_100%)]"
+      : "absolute inset-0 bg-[linear-gradient(135deg,rgba(2,6,23,0.82)_0%,rgba(15,23,42,0.45)_50%,rgba(2,6,23,0.74)_100%)]",
+    accent: isDarkMode ? "text-sky-100" : "text-slate-900",
+    mutedText: isDarkMode ? "text-slate-300" : "text-slate-600",
+    bodyText: isDarkMode ? "text-slate-100" : "text-slate-800",
+    pill: isDarkMode
+      ? "border border-sky-400/20 bg-sky-500/15 text-sky-200"
+      : "border border-sky-200 bg-sky-50 text-sky-700",
+  };
+
   return (
-    <main className="min-h-screen bg-[radial-gradient(circle_at_top,_#0c1a34,_#081523_55%,_#081523)] text-slate-100 relative">
+    <main className={`min-h-screen relative transition-colors duration-300 ${themeStyles.main}`}>
       <div className="fixed inset-0 -z-10">
-        {useVideo && (
+        {isDarkMode && useVideo && (
           <video
             src={defaultVideoUrl}
             autoPlay
@@ -129,58 +166,81 @@ export default function Home() {
             className="h-full w-full object-cover"
           />
         )}
-        <div className="absolute inset-0 bg-slate-950/55" />
+        <div className={`absolute inset-0 ${isDarkMode ? "bg-slate-950/65" : "bg-white"}`} />
       </div>
-      <section className="mx-auto flex max-w-7xl flex-col gap-12 px-6 py-20 lg:px-8 lg:py-28">
-        <header className="flex flex-col gap-4 rounded-3xl border border-slate-700 bg-slate-950/80 p-8 shadow-xl shadow-slate-950/60 backdrop-blur">
-          <p className="w-fit rounded-full bg-cyan-500/15 px-3 py-1 text-sm font-semibold text-cyan-200">
+      <section className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 lg:px-8 lg:py-16">
+        <div className={`flex items-center justify-between gap-4 rounded-[2rem] px-4 py-3 shadow-sm backdrop-blur-sm ${isDarkMode ? "bg-slate-900/80 text-slate-100 shadow-slate-950/30" : "bg-white/80 text-slate-950 shadow-slate-200/80"}`}>
+          <span className="text-sm font-medium">Tema actual: {isDarkMode ? "Oscuro" : "Claro"}</span>
+          <button
+            onClick={() => setIsDarkMode((value) => !value)}
+            className={themeStyles.toggleButton}
+          >
+            {isDarkMode ? "Cambiar a claro" : "Cambiar a oscuro"}
+          </button>
+        </div>
+        <header className={`${themeStyles.cardSection} flex flex-col gap-8 p-8 lg:p-10`}>
+          <p className={`w-fit rounded-full px-3 py-1 text-sm font-semibold ${themeStyles.pill}`}>
             Agencia Aduanera especializada
           </p>
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
             <div className="max-w-2xl">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+              <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
                 Soluciones aduaneras ágiles para tu comercio internacional
               </h1>
-              <p className="mt-4 text-lg leading-8 text-slate-600">
+              <p className={`mt-4 max-w-2xl text-lg leading-8 ${themeStyles.mutedText}`}>
                 Acompañamos importaciones, exportaciones y operaciones logísticas con
                 cumplimiento, agilidad y asesoría estratégica.
               </p>
             </div>
             <a
               href="#contacto"
-              className="inline-flex items-center justify-center rounded-full bg-slate-900 px-6 py-3 font-semibold text-white transition hover:bg-slate-700"
+              className={`inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition ${isDarkMode ? "bg-sky-500 text-slate-950 hover:bg-sky-400" : "bg-slate-900 text-white hover:bg-slate-800"}`}
             >
               Solicitar asesoría
             </a>
           </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {highlights.map((item) => (
+              <article
+                key={item.title}
+                className={`rounded-2xl border p-5 ${isDarkMode ? "border-slate-700 bg-slate-900/70" : "border-slate-200 bg-slate-50/80"}`}
+              >
+                <div className={`mb-3 inline-flex h-10 w-10 items-center justify-center rounded-full ${isDarkMode ? "bg-sky-500/15 text-sky-200" : "bg-sky-100 text-sky-700"}`}>
+                  ✓
+                </div>
+                <h3 className={`text-lg font-semibold ${themeStyles.accent}`}>{item.title}</h3>
+                <p className={`mt-2 text-sm leading-6 ${themeStyles.mutedText}`}>{item.text}</p>
+              </article>
+            ))}
+          </div>
         </header>
 
-        <section className="rounded-3xl border border-slate-700 bg-slate-950/95 p-8 shadow-xl shadow-slate-950/50">
+        <section className={`${themeStyles.cardSection} p-8 lg:p-10`}>
           <div className="text-center">
-            <h2 className="text-3xl font-bold text-cyan-100">¿Qué Hacemos?</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-slate-300">
+            <h2 className={`text-3xl font-semibold ${themeStyles.accent}`}>¿Qué Hacemos?</h2>
+            <p className={`mx-auto mt-3 max-w-2xl text-base ${themeStyles.mutedText}`}>
               Servicios aduanales y logísticos integrales para tu negocio
             </p>
           </div>
 
-          <div className="mt-10">
+          <div className="mt-8 lg:mt-10">
             <div
-              className="relative overflow-hidden rounded-3xl border border-slate-700 shadow-sm shadow-slate-950/40 transition-shadow hover:shadow-lg"
+              className={themeStyles.serviceCardWrapper}
               style={{
                 backgroundImage: `url(${boxes[activeIndex].image})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
               }}
             >
-              <div className="absolute inset-0 bg-slate-950/50" />
-              <div className="relative space-y-8 p-8 text-white transition-all duration-700 ease-out">
+              <div className={themeStyles.serviceOverlay} />
+              <div className="relative flex min-h-[420px] flex-col justify-between gap-6 p-8 text-white transition-all duration-700 ease-out lg:p-10">
                 <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
                   <div className="flex items-center gap-4">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-3xl bg-white/10 text-3xl shadow-sm backdrop-blur-sm">
+                    <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/20 bg-white/10 text-3xl shadow-sm backdrop-blur-sm">
                       {boxes[activeIndex].icon}
                     </div>
                     <div>
-                      <h3 className="text-2xl font-semibold text-cyan-100">{boxes[activeIndex].title}</h3>
+                      <h3 className="text-2xl font-semibold text-white">{boxes[activeIndex].title}</h3>
                       <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">
                         {boxes[activeIndex].description}
                       </p>
@@ -200,10 +260,10 @@ export default function Home() {
                   </div>
                 </div>
 
-                <ul className="mt-8 space-y-3 text-sm md:max-w-md">
+                <ul className="space-y-3 rounded-2xl border border-white/15 bg-white/10 p-4 text-sm shadow-lg shadow-slate-950/20 backdrop-blur-sm md:max-w-md">
                   {boxes[activeIndex].points.map((point) => (
                     <li key={point} className="flex items-start gap-3 text-slate-100">
-                      <span className="mt-1 text-cyan-300">✓</span>
+                      <span className="mt-1 text-sky-300">✓</span>
                       <span>{point}</span>
                     </li>
                   ))}
@@ -216,7 +276,7 @@ export default function Home() {
 {/*          <div className="flex justify-end items-center gap-3">
          <button
             onClick={() => setUseVideo((v) => !v)}
-            className="mt-4 rounded-md bg-cyan-500 px-3 py-2 text-sm font-medium text-slate-950 hover:bg-cyan-400"
+            className="mt-4 rounded-md bg-sky-500 px-3 py-2 text-sm font-medium text-slate-950 hover:bg-sky-400"
           >
             {useVideo ? "Fondo: Video (ON)" : "Fondo: Video (OFF)"}
           </button>
@@ -300,7 +360,7 @@ export default function Home() {
             <div className="w-full max-w-2xl rounded-3xl bg-slate-900 p-6 text-slate-100 shadow-2xl shadow-slate-950/60">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-cyan-300">
+                  <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-300">
                     Formulario de cotización
                   </p>
                   <h3 className="mt-2 text-2xl font-bold">Envíanos tu solicitud</h3>
@@ -361,7 +421,7 @@ export default function Home() {
                     value={quoteSubject}
                     onChange={(e) => setQuoteSubject(e.target.value)}
                     placeholder="Asunto de la cotización"
-                    className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-400"
+                    className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                   />
                 </div>
                 <div className="grid gap-4 md:grid-cols-2">
@@ -372,7 +432,7 @@ export default function Home() {
                       value={quoteEmail}
                       onChange={(e) => setQuoteEmail(e.target.value)}
                       placeholder="tucorreo@dominio.com"
-                      className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-400"
+                      className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                     />
                   </div>
                   <div>
@@ -381,7 +441,7 @@ export default function Home() {
                       value={quoteName}
                       onChange={(e) => setQuoteName(e.target.value)}
                       placeholder="Nombre del cliente"
-                      className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-400"
+                      className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                     />
                   </div>
                 </div>
@@ -392,7 +452,7 @@ export default function Home() {
                     onChange={(e) => setQuoteDetails(e.target.value)}
                     placeholder="Describe tu solicitud o los datos de tu carga"
                     rows={5}
-                    className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-cyan-400"
+                    className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                   />
                 </div>
                 <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-end">
@@ -406,7 +466,7 @@ export default function Home() {
                   <button
                     type="submit"
                     disabled={quoteStatus === "sending"}
-                    className="rounded-2xl bg-cyan-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-400 disabled:cursor-not-allowed disabled:opacity-60"
+                    className="rounded-2xl bg-sky-500 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-sky-400 disabled:cursor-not-allowed disabled:opacity-60"
                   >
                     {quoteStatus === "sending" ? "Enviando..." : "Enviar solicitud"}
                   </button>
@@ -429,23 +489,23 @@ export default function Home() {
 
         <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="rounded-3xl border border-slate-700 bg-slate-950/85 p-8 shadow-lg shadow-slate-950/50">
-            <h2 className="text-2xl font-semibold text-cyan-100">Nuestros servicios</h2>
+            <h2 className="text-2xl font-semibold text-sky-100">Nuestros servicios</h2>
             <ul className="mt-6 space-y-3 text-slate-200">
               {services.map((service) => (
                 <li key={service} className="flex items-center gap-3 rounded-2xl bg-slate-800/80 px-4 py-3 text-slate-100">
-                  <span className="text-xl text-cyan-300">•</span>
+                  <span className="text-xl text-sky-300">•</span>
                   {service}
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="rounded-3xl border border-cyan-500/30 bg-slate-900/90 p-8 shadow-lg shadow-cyan-500/20">
-            <h2 className="text-2xl font-semibold text-cyan-100">¿Por qué elegirnos?</h2>
+          <div className="rounded-3xl border border-sky-500/30 bg-slate-900/90 p-8 shadow-lg shadow-sky-500/20">
+            <h2 className="text-2xl font-semibold text-sky-100">¿Por qué elegirnos?</h2>
             <div className="mt-6 space-y-5">
               {highlights.map((item) => (
                 <div key={item.title}>
-                  <h3 className="font-semibold text-cyan-100">{item.title}</h3>
+                  <h3 className="font-semibold text-sky-100">{item.title}</h3>
                   <p className="mt-1 text-sm leading-6 text-slate-300">{item.text}</p>
                 </div>
               ))}
@@ -468,7 +528,7 @@ export default function Home() {
             </div>
             <button
               onClick={() => setShowQuoteForm(true)}
-              className="inline-flex items-center justify-center rounded-full bg-cyan-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-cyan-400"
+              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-sky-400"
             >
               Solicitar cotización
             </button>
