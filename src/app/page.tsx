@@ -220,7 +220,7 @@ export default function Home() {
           </div>
         </header>
 
-        <section className={`${themeStyles.cardSection} p-8 lg:p-10`}>
+        <section id="servicios" className={`${themeStyles.cardSection} scroll-mt-28 p-8 lg:p-10`}>
           <div className="text-center">
             <h2 className={`text-3xl font-semibold ${themeStyles.accent}`}>¿Qué Hacemos?</h2>
             <p className={`mx-auto mt-3 max-w-2xl text-base ${themeStyles.mutedText}`}>
@@ -520,7 +520,7 @@ export default function Home() {
           </div>
         )}
 
-        <section className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
+        <section id="ubicaciones" className="grid scroll-mt-28 gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="rounded-3xl border border-slate-700 bg-slate-950/85 p-8 shadow-lg shadow-slate-950/50">
             <h2 className="text-2xl font-semibold text-sky-100">Nuestros servicios</h2>
             <ul className="mt-6 space-y-3 text-slate-200">
