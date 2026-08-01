@@ -1,2 +1,4 @@
 {"timestamp":"2026-08-01T03:31:16.940Z","stage":"request-received","subject":"prueba-log","email":"test@example.com","name":"Prueba","detailsLength":17}
 {"timestamp":"2026-08-01T03:31:18.675Z","stage":"success","subject":"prueba-log","email":"test@example.com","name":"Prueba"}
+{"timestamp":"2026-08-01T03:37:54.266Z","stage":"request-received","subject":"prueba-405","email":"test@example.com","name":"Prueba","detailsLength":17}
+{"timestamp":"2026-08-01T03:37:55.867Z","stage":"success","subject":"prueba-405","email":"test@example.com","name":"Prueba"}
