@@ -98,6 +98,26 @@ export default function Home() {
 
   const defaultVideoUrl = "/earth.mp4";
 
+  const persistQuoteLog = (stage: "submit" | "success" | "error", payload?: Record<string, unknown>) => {
+    try {
+      const existingLogs = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("quoteLogs") || "[]") : [];
+      const logEntry = {
+        timestamp: new Date().toISOString(),
+        stage,
+        ...payload,
+      };
+      const nextLogs = [...existingLogs, logEntry].slice(-50);
+
+      if (typeof window !== "undefined") {
+        localStorage.setItem("quoteLogs", JSON.stringify(nextLogs));
+      }
+
+      console.info("[quote-log]", logEntry);
+    } catch (e) {
+      console.error("[quote-log] No se pudo guardar el log", e);
+    }
+  };
+
   useEffect(() => {
     try {
       localStorage.setItem("useVideo", useVideo ? "true" : "false");
@@ -395,6 +415,14 @@ export default function Home() {
               <form
                 onSubmit={async (event) => {
                   event.preventDefault();
+                  const payload = {
+                    subject: quoteSubject || "Solicitud de cotización",
+                    email: quoteEmail,
+                    name: quoteName,
+                    details: quoteDetails,
+                  };
+
+                  persistQuoteLog("submit", payload);
                   setQuoteStatus("sending");
                   setQuoteMessage("");
 
@@ -404,12 +432,7 @@ export default function Home() {
                       headers: {
                         "Content-Type": "application/json",
                       },
-                      body: JSON.stringify({
-                        subject: quoteSubject || "Solicitud de cotización",
-                        email: quoteEmail,
-                        name: quoteName,
-                        details: quoteDetails,
-                      }),
+                      body: JSON.stringify(payload),
                     });
 
                     if (!response.ok) {
@@ -417,6 +440,7 @@ export default function Home() {
                       throw new Error(data.error || "Error enviando cotización");
                     }
 
+                    persistQuoteLog("success", payload);
                     setQuoteStatus("success");
                     setQuoteMessage("Tu solicitud ha sido enviada. Nos comunicaremos pronto.");
                     setQuoteSubject("");
@@ -432,6 +456,10 @@ export default function Home() {
                       }, 300);
                     }, 3000);
                   } catch (error) {
+                    persistQuoteLog("error", {
+                      error: error instanceof Error ? error.message : "No se pudo enviar la solicitud",
+                      payload,
+                    });
                     setQuoteStatus("error");
                     setQuoteMessage(
                       error instanceof Error
