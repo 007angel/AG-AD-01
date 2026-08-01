@@ -435,9 +435,23 @@ export default function Home() {
                       body: JSON.stringify(payload),
                     });
 
+                    const responseText = await response.text();
+                    let responseData: { error?: string } | null = null;
+
+                    if (responseText) {
+                      try {
+                        responseData = JSON.parse(responseText) as { error?: string };
+                      } catch {
+                        responseData = null;
+                      }
+                    }
+
                     if (!response.ok) {
-                      const data = await response.json();
-                      throw new Error(data.error || "Error enviando cotización");
+                      throw new Error(
+                        responseData?.error ||
+                          responseText ||
+                          "Error enviando cotización"
+                      );
                     }
 
                     persistQuoteLog("success", payload);
