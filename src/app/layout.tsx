@@ -50,9 +50,9 @@ export const metadata: Metadata = {
     url: "https://agenciaaduaneralya.com",
     images: [
       {
-        url: "/logo.png",
+        url: "/logopre.png",
         width: 1200,
-        height: 360,
+        height: 630,
         alt: "Agencia Aduanera L & A",
       },
     ],
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Agencia Aduanera L & A",
     description: "Aduana, transporte, marítimo, carga, aéreo, confianza y trámites internacionales.",
-    images: ["/logo.png"],
+    images: ["/logopre.png"],
   },
 };
 
