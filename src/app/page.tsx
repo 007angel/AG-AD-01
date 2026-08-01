@@ -82,6 +82,7 @@ export default function Home() {
   const [quoteDetails, setQuoteDetails] = useState("");
   const [quoteStatus, setQuoteStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [quoteMessage, setQuoteMessage] = useState("");
+  const [isQuoteClosing, setIsQuoteClosing] = useState(false);
   const [editedBoxes, setEditedBoxes] = useState(boxes);
   const [useVideo, setUseVideo] = useState(() => {
     try {
@@ -112,6 +113,19 @@ export default function Home() {
       // ignore
     }
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const handleThemeChanged = (event: Event) => {
+      const customEvent = event as CustomEvent<{ isDarkMode: boolean }>;
+      setIsDarkMode(customEvent.detail.isDarkMode);
+    };
+
+    window.addEventListener("theme:changed", handleThemeChanged);
+
+    return () => {
+      window.removeEventListener("theme:changed", handleThemeChanged);
+    };
+  }, []);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -169,15 +183,6 @@ export default function Home() {
         <div className={`absolute inset-0 ${isDarkMode ? "bg-slate-950/65" : "bg-white"}`} />
       </div>
       <section className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 lg:px-8 lg:py-16">
-        <div className={`flex items-center justify-between gap-4 rounded-[2rem] px-4 py-3 shadow-sm backdrop-blur-sm ${isDarkMode ? "bg-slate-900/80 text-slate-100 shadow-slate-950/30" : "bg-white/80 text-slate-950 shadow-slate-200/80"}`}>
-          <span className="text-sm font-medium">Tema actual: {isDarkMode ? "Oscuro" : "Claro"}</span>
-          <button
-            onClick={() => setIsDarkMode((value) => !value)}
-            className={themeStyles.toggleButton}
-          >
-            {isDarkMode ? "Cambiar a claro" : "Cambiar a oscuro"}
-          </button>
-        </div>
         <header className={`${themeStyles.cardSection} flex flex-col gap-8 p-8 lg:p-10`}>
           <p className={`w-fit rounded-full px-3 py-1 text-sm font-semibold ${themeStyles.pill}`}>
             Agencia Aduanera especializada
@@ -356,8 +361,16 @@ export default function Home() {
         )}
 
         {showQuoteForm && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 py-6 sm:px-6">
-            <div className="w-full max-w-2xl rounded-3xl bg-slate-900 p-6 text-slate-100 shadow-2xl shadow-slate-950/60">
+          <div
+            className={`fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 py-6 transition-opacity duration-300 sm:px-6 ${
+              isQuoteClosing ? "opacity-0" : "opacity-100"
+            }`}
+          >
+            <div
+              className={`w-full max-w-2xl rounded-3xl bg-slate-900 p-6 text-slate-100 shadow-2xl shadow-slate-950/60 transition-all duration-300 ${
+                isQuoteClosing ? "translate-y-4 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"
+              }`}
+            >
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-sm font-semibold uppercase tracking-[0.3em] text-sky-300">
@@ -366,7 +379,13 @@ export default function Home() {
                   <h3 className="mt-2 text-2xl font-bold">Envíanos tu solicitud</h3>
                 </div>
                 <button
-                  onClick={() => setShowQuoteForm(false)}
+                  onClick={() => {
+                    setIsQuoteClosing(true);
+                    window.setTimeout(() => {
+                      setShowQuoteForm(false);
+                      setIsQuoteClosing(false);
+                    }, 300);
+                  }}
                   className="rounded-full bg-slate-800 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-700"
                 >
                   Cerrar
@@ -404,6 +423,14 @@ export default function Home() {
                     setQuoteEmail("");
                     setQuoteName("");
                     setQuoteDetails("");
+
+                    window.setTimeout(() => {
+                      setIsQuoteClosing(true);
+                      window.setTimeout(() => {
+                        setShowQuoteForm(false);
+                        setIsQuoteClosing(false);
+                      }, 300);
+                    }, 3000);
                   } catch (error) {
                     setQuoteStatus("error");
                     setQuoteMessage(
@@ -458,7 +485,13 @@ export default function Home() {
                 <div className="flex flex-col gap-3 pt-2 sm:flex-row sm:justify-end">
                   <button
                     type="button"
-                    onClick={() => setShowQuoteForm(false)}
+                    onClick={() => {
+                      setIsQuoteClosing(true);
+                      window.setTimeout(() => {
+                        setShowQuoteForm(false);
+                        setIsQuoteClosing(false);
+                      }, 300);
+                    }}
                     className="rounded-2xl border border-slate-700 bg-transparent px-5 py-3 text-sm text-slate-200 transition hover:bg-slate-800"
                   >
                     Cancelar
@@ -527,7 +560,10 @@ export default function Home() {
               </h2>
             </div>
             <button
-              onClick={() => setShowQuoteForm(true)}
+              onClick={() => {
+                setIsQuoteClosing(false);
+                setShowQuoteForm(true);
+              }}
               className="inline-flex items-center justify-center rounded-full bg-sky-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-sky-400"
             >
               Solicitar cotización

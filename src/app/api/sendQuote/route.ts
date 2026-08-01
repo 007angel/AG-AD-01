@@ -7,7 +7,7 @@ const smtpConfig = {
   secure: true,
   auth: {
     user: "operaciones@agenciaaduaneralya.com",
-    pass: process.env.SMTP_PASSWORD || "",
+    pass: process.env.SMTP_PASSWORD || "aw7XT6I@",
   },
 };
 
