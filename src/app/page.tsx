@@ -203,27 +203,24 @@ export default function Home() {
         <div className={`absolute inset-0 ${isDarkMode ? "bg-slate-950/65" : "bg-white"}`} />
       </div>
       <section className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 lg:px-8 lg:py-16">
-        <header className={`${themeStyles.cardSection} flex flex-col gap-8 p-8 lg:p-10`}>
-          <p className={`w-fit rounded-full px-3 py-1 text-sm font-semibold ${themeStyles.pill}`}>
-            Agencia Aduanera especializada
-          </p>
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div className="max-w-2xl">
-              <h1 className="text-4xl font-bold leading-tight tracking-tight sm:text-5xl">
-                Soluciones aduaneras ágiles para tu comercio internacional
-              </h1>
-              <p className={`mt-4 max-w-2xl text-lg leading-8 ${themeStyles.mutedText}`}>
-                Acompañamos importaciones, exportaciones y operaciones logísticas con
-                cumplimiento, agilidad y asesoría estratégica.
-              </p>
-            </div>
-            <a
-              href="#contacto"
-              className={`inline-flex items-center justify-center rounded-full px-6 py-3 font-semibold transition ${isDarkMode ? "bg-sky-500 text-slate-950 hover:bg-sky-400" : "bg-slate-900 text-white hover:bg-slate-800"}`}
-            >
-              Solicitar asesoría
-            </a>
+        <header className={`${themeStyles.cardSection} mx-auto flex w-full max-w-[1600px] flex-col gap-8 p-8 lg:p-10`}>
+          <div className="flex justify-center">
+            <p className={`w-fit rounded-full px-6 py-3 text-2xl font-semibold sm:text-3xl ${themeStyles.pill}`}>
+              Agencia Aduanera especializada
+            </p>
           </div>
+<div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+  <div className="w-full">
+    <h1 className="max-w-7xl text-4xl font-bold leading-[1.1] tracking-tight text-slate-950 sm:text-5xl md:text-6xl lg:text-7xl lg:leading-[0.95]">
+      Soluciones aduaneras ágiles para tu comercio internacional
+    </h1>
+    <p className={`mt-6 max-w-4xl text-base leading-7 sm:text-lg sm:leading-8 ${themeStyles.mutedText}`}>
+      Acompañamos importaciones, exportaciones y operaciones logísticas con
+      cumplimiento, agilidad y asesoría estratégica.
+    </p>
+  </div>
+</div>
+
           <div className="grid gap-4 md:grid-cols-3">
             {highlights.map((item) => (
               <article
@@ -606,7 +603,7 @@ export default function Home() {
                 setIsQuoteClosing(false);
                 setShowQuoteForm(true);
               }}
-              className="inline-flex items-center justify-center rounded-full bg-sky-500 px-6 py-3 font-semibold text-slate-950 transition hover:bg-sky-400"
+              className="inline-flex items-center justify-center rounded-full bg-emerald-500 px-6 py-3 font-semibold text-white shadow-xl shadow-emerald-500/30 transition hover:bg-emerald-400"
             >
               Solicitar cotización
             </button>
@@ -614,7 +611,13 @@ export default function Home() {
         </section>
       </section>
       <a
-        href="https://wa.me/55886804"
+        href="#contacto"
+        className="fixed bottom-24 right-6 z-50 inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white shadow-xl shadow-emerald-500/30 transition hover:bg-emerald-400"
+      >
+        Solicitar asesoría
+      </a>
+      <a
+        href="https://wa.me/+50432890454"
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-3 rounded-full bg-emerald-500 px-4 py-3 text-sm font-semibold text-white shadow-xl shadow-emerald-500/30 transition hover:bg-emerald-400"
