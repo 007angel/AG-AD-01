@@ -1,0 +1,74 @@
+export type Highlight = {
+  title: string;
+  text: string;
+};
+
+export type ServiceBox = {
+  title: string;
+  description: string;
+  points: string[];
+  icon: string;
+  image: string;
+};
+
+export const services = [
+  "Importación y exportación",
+  "Trámites aduaneros",
+  "Consultoría regulatoria",
+  "Logística internacional",
+];
+
+export const highlights: Highlight[] = [
+  {
+    title: "100% Compliance",
+    text: "Cumplimos con cada regulación vigente para evitar demoras y sanciones.",
+  },
+  {
+    title: "Atención personalizada",
+    text: "Diseñamos soluciones ágiles para cada operación de comercio exterior.",
+  },
+  {
+    title: "Cobertura nacional",
+    text: "Operamos con velocidad y precisión para mover tu carga sin fricción.",
+  },
+];
+
+export const defaultServiceBoxes: ServiceBox[] = [
+  {
+    title: "Agencia Aduanal",
+    description: "Despachos aduanales rápidos y precisos en todas las aduanas de Honduras.",
+    points: [
+      "Importación y exportación",
+      "Clasificación arancelaria",
+      "Asesoría legal",
+      "Despacho Ágiles",
+    ],
+    icon: "📦",
+    image:
+      "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Logística Internacional",
+    description: "Transporte aéreo, marítimo y terrestre con seguro de mercancías incluido.",
+    points: ["Transporte aéreo", "Transporte marítimo", "Seguro de carga", "Rastreo en tiempo real"],
+    icon: "🌍",
+    image:
+      "https://images.unsplash.com/photo-1517502166878-35c93a0072bb?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Gestión de Carga",
+    description: "Almacenaje, consolidación y embalaje profesional de tu mercancía.",
+    points: ["Almacenaje seguro", "Consolidación de carga", "Embalaje profesional"],
+    icon: "📍",
+    image:
+      "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
+  },
+  {
+    title: "Asesoría y Trámites",
+    description: "Consultoría en comercio exterior y gestión de permisos especiales.",
+    points: ["Consultoría aduanera", "Gestión de permisos", "Defensa legal", "Cumplimiento normativo"],
+    icon: "⚖️",
+    image:
+      "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
+  },
+];

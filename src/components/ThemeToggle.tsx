@@ -1,32 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useTheme } from "../hooks/useTheme";
 
 export function ThemeToggle() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  useEffect(() => {
-    const storedTheme = typeof window !== "undefined" ? localStorage.getItem("theme") : null;
-    const nextMode = storedTheme === "dark";
-    setIsDarkMode(nextMode);
-  }, []);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-
-    localStorage.setItem("theme", isDarkMode ? "dark" : "light");
-    window.dispatchEvent(
-      new CustomEvent("theme:changed", {
-        detail: { isDarkMode },
-      })
-    );
-  }, [isDarkMode]);
+  const { isDarkMode, toggleTheme } = useTheme();
 
   return (
     <button
       type="button"
       aria-label={isDarkMode ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
-      onClick={() => setIsDarkMode((value) => !value)}
+      onClick={toggleTheme}
       className={`inline-flex h-11 w-11 items-center justify-center rounded-full text-lg shadow-lg transition duration-200 focus:outline-none focus:ring-2 focus:ring-sky-400 ${
         isDarkMode
           ? "bg-sky-500 text-slate-950 shadow-sky-500/20 hover:bg-sky-400"

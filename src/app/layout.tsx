@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { ThemeToggle } from "../components/ThemeToggle";
+import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -75,55 +75,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-<html lang="es" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
-  <body className="min-h-full flex flex-col">
-    <header className="fixed inset-x-0 top-0 z-50 w-full bg-slate-900/95 text-white shadow-lg shadow-slate-950/20 backdrop-blur-lg">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        
-        {/* LOGO (Izquierda) */}
-        <a
-          href="#"
-          className="flex items-center rounded-2xl border border-white/10 bg-white/5 px-3 py-2 shadow-sm shadow-slate-950/20 ring-1 ring-white/5"
-        >
-          <img
-            src="/logo.png"
-            alt="Agencia Aduanera L & A"
-            className="h-14 w-auto object-contain md:h-16"
-            style={{ filter: "drop-shadow(0 0 6px rgba(15, 23, 42, 0.35))" }}
-          />
-        </a>
+    <html lang="es" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <body className="min-h-full flex flex-col">
+        <SiteHeader />
 
-        {/* MENÚ DE NAVEGACIÓN (Centro perfecto) */}
-        <nav className="hidden md:flex items-center gap-8 text-base font-medium mechanical-center">
-          <a href="#" className="transition-colors duration-200 hover:text-amber-300">Inicio</a>
-          <a href="#servicios" className="transition-colors duration-200 hover:text-amber-300">Servicios</a>
-          <a href="#ubicaciones" className="transition-colors duration-200 hover:text-amber-300">Ubicaciones</a>
-          <a href="#contacto" className="transition-colors duration-200 hover:text-amber-300">Contacto</a>
-        </nav>
-
-        {/* BOTONES Y MENÚ MÓVIL (Derecha) */}
-        <div className="flex items-center gap-4">
-          {/* Eliminado ml-auto para no romper el espacio */}
-          <ThemeToggle />
-
-          {/* Botón de Menú Móvil */}
-          <div className="md:hidden">
-            <button 
-              aria-label="Abrir menú" 
-              className="inline-flex items-center justify-center rounded-md border border-slate-700 px-3 py-2 text-sm transition-colors duration-200 hover:bg-slate-800"
-            >
-              ☰
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </header>
-
-    {/* Contenedor principal con el espaciado correcto para el header fijo */}
-    <div className="pt-[88px] w-full flex-1">{children}</div>
-  </body>
-</html>
-
+        <div className="pt-[88px] w-full flex-1">{children}</div>
+      </body>
+    </html>
   );
 }
