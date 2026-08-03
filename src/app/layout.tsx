@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
@@ -13,31 +13,42 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport: Viewport = {
+  themeColor: "#071a35",
+};
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://agenciaaduaneralya.com"),
-  title: "Agencia Aduanera L & A | Agencia Aduanera",
-  description: "Agencia aduanera especializada en importación, exportación, transporte marítimo, carga aérea, trámites aduaneros y logística internacional.",
+  title: {
+    default: "Agencia Aduanera L & A | Aduanas y Logística Internacional en Honduras",
+    template: "%s | Agencia Aduanera L & A",
+  },
+  description:
+    "Agencia aduanera en Honduras. Importación, exportación, trámites aduaneros, transporte marítimo, carga aérea y logística internacional con cumplimiento y agilidad.",
   applicationName: "Agencia Aduanera L & A",
   authors: [{ name: "Agencia Aduanera L & A" }],
   publisher: "Agencia Aduanera L & A",
   category: "Aduanas y logística internacional",
   classification: "Aduana, transporte, carga, logística internacional",
   keywords: [
-    "aduana",
-    "transporte",
-    "marítimo",
-    "carga",
-    "aéreo",
-    "confianza",
-    "rápido",
-    "trámites",
     "agencia aduanera",
+    "aduana",
+    "agencia aduanal",
+    "transporte marítimo",
+    "carga aérea",
+    "trámites aduaneros",
     "logística internacional",
-    "Honduras",
-    "servicios aduaneros",
     "importación",
     "exportación",
+    "Honduras",
+    "servicios aduaneros",
   ],
+  icons: {
+    icon: [
+      { url: "/logo.png", type: "image/png" },
+      { url: "/logopre.png", type: "image/png" },
+    ],
+  },
   robots: {
     index: true,
     follow: true,
@@ -46,26 +57,30 @@ export const metadata: Metadata = {
     canonical: "https://agenciaaduaneralya.com",
   },
   openGraph: {
-    title: "Agencia Aduanera L & A",
-    description: "Soluciones rápidas, confiables y especializadas en aduanas, transporte marítimo, carga aérea y trámites internacionales.",
+    title: "Agencia Aduanera L & A | Aduanas y Logística Internacional en Honduras",
+    description:
+      "Agencia aduanera en Honduras. Importación, exportación, trámites aduaneros, transporte marítimo, carga aérea y logística internacional.",
     type: "website",
     locale: "es_HN",
     siteName: "Agencia Aduanera L & A",
     url: "https://agenciaaduaneralya.com",
     images: [
       {
-        url: "/logopre.png",
-        width: 1200,
-        height: 630,
+        url: "https://agenciaaduaneralya.com/logopre.png",
+        secureUrl: "https://agenciaaduaneralya.com/logopre.png",
+        width: 1232,
+        height: 848,
         alt: "Agencia Aduanera L & A",
+        type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Agencia Aduanera L & A",
-    description: "Aduana, transporte, marítimo, carga, aéreo, confianza y trámites internacionales.",
-    images: ["/logopre.png"],
+    title: "Agencia Aduanera L & A | Aduanas y Logística Internacional",
+    description:
+      "Importación, exportación, trámites aduaneros, transporte marítimo, carga aérea y logística internacional en Honduras.",
+    images: ["https://agenciaaduaneralya.com/logopre.png"],
   },
 };
 
