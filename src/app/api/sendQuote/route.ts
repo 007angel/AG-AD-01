@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 
     await transporter.sendMail({
       from: "operaciones@agenciaaduaneralya.com",
-      to: "angel.chaclan@outlook.com",
+      to: "operaciones@agenciaaduaneralya.com",
       replyTo: email,
       subject: `Cotización: ${subject}`,
       text: `Nombre: ${name}\nCorreo cliente: ${email}\n\nDetalle:\n${details}`,

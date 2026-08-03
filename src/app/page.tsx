@@ -487,6 +487,7 @@ export default function Home() {
                     value={quoteSubject}
                     onChange={(e) => setQuoteSubject(e.target.value)}
                     placeholder="Asunto de la cotización"
+                    required
                     className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                   />
                 </div>
@@ -498,6 +499,7 @@ export default function Home() {
                       value={quoteEmail}
                       onChange={(e) => setQuoteEmail(e.target.value)}
                       placeholder="tucorreo@dominio.com"
+                      required
                       className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                     />
                   </div>
@@ -507,6 +509,7 @@ export default function Home() {
                       value={quoteName}
                       onChange={(e) => setQuoteName(e.target.value)}
                       placeholder="Nombre del cliente"
+                      required
                       className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                     />
                   </div>
@@ -518,6 +521,7 @@ export default function Home() {
                     onChange={(e) => setQuoteDetails(e.target.value)}
                     placeholder="Describe tu solicitud o los datos de tu carga"
                     rows={5}
+                    required
                     className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
                   />
                 </div>
@@ -610,14 +614,18 @@ export default function Home() {
           </div>
         </section>
       </section>
-      <a
-        href="#contacto"
+      <button
+        type="button"
+        onClick={() => {
+          setIsQuoteClosing(false);
+          setShowQuoteForm(true);
+        }}
         className="fixed bottom-24 right-6 z-50 inline-flex items-center justify-center rounded-full bg-emerald-500 px-5 py-3 text-sm font-semibold text-white shadow-xl shadow-emerald-500/30 transition hover:bg-emerald-400"
       >
         Solicitar asesoría
-      </a>
+      </button>
       <a
-        href="https://wa.me/+50432890454"
+        href={`https://wa.me/+50432890454?text=${encodeURIComponent("Gracias por contactar a Agencia Aduanera L&A, en un momento le atenderemos")}`}
         target="_blank"
         rel="noreferrer"
         className="fixed bottom-6 right-6 z-50 inline-flex items-center gap-3 rounded-full bg-emerald-500 px-4 py-3 text-sm font-semibold text-white shadow-xl shadow-emerald-500/30 transition hover:bg-emerald-400"
