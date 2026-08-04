@@ -4,12 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 
 type QuoteStatus = "idle" | "sending" | "success" | "error";
 
-type QuotePayload = {
-  subject: string;
-  email: string;
-  name: string;
-  details: string;
-};
+const FORM_SUBMIT_URL = "https://formsubmit.co/operaciones@agenciaaduaneralya.com";
 
 const persistQuoteLog = (stage: "submit" | "success" | "error", payload?: Record<string, unknown>) => {
   try {
@@ -88,11 +83,14 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
         <form
           onSubmit={async (event) => {
             event.preventDefault();
-            const payload: QuotePayload = {
+            const payload = {
               subject: subject || "Solicitud de cotización",
-              email,
               name,
-              details,
+              email,
+              message: details,
+              _replyto: email,
+              _subject: `Cotización: ${subject || "Solicitud de cotización"}`,
+              _template: "table",
             };
 
             persistQuoteLog("submit", payload);
@@ -100,29 +98,17 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
             setMessage("");
 
             try {
-              const response = await fetch("/api/sendQuote", {
+              const response = await fetch(FORM_SUBMIT_URL, {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",
+                  Accept: "application/json",
                 },
                 body: JSON.stringify(payload),
               });
 
-              const responseText = await response.text();
-              let responseData: { error?: string } | null = null;
-
-              if (responseText) {
-                try {
-                  responseData = JSON.parse(responseText) as { error?: string };
-                } catch {
-                  responseData = null;
-                }
-              }
-
               if (!response.ok) {
-                throw new Error(
-                  responseData?.error || responseText || "Error enviando cotización"
-                );
+                throw new Error("Error enviando cotización");
               }
 
               persistQuoteLog("success", payload);
