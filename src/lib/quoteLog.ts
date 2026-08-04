@@ -10,7 +10,7 @@ export type QuoteLogEntry = {
 
 const LOG_SHEET_URL =
   process.env.NEXT_PUBLIC_LOG_SHEET_URL ||
-  "https://script.google.com/macros/s/AKfycbzE4AorHcZl3FNfD6_zV0gTg8A4kylxCqmsmQKJTOvo8tksRlyEe6aulfzC8Gcq5itw/exec";
+  "https://script.google.com/macros/s/AKfycbydaXmm9FWtNSGJjBxeWVH7PtUR_19DxkQp6U0o8XoWHvk_xkP0cI0eBFPpzpClSjZ1IA/exec";
 
 /**
  * Envía cada solicitud a una Google Sheet vía Google Apps Script.
