@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { logQuoteToSheet } from "../lib/quoteLog";
 
 type QuoteStatus = "idle" | "sending" | "success" | "error";
 
-const FORM_SUBMIT_URL = "https://formsubmit.co/operaciones@agenciaaduaneralya.com";
+const FORM_SUBMIT_URL = "https://formsubmit.co/gerenciageneral@agenciaaduaneralya.com";
 
 const persistQuoteLog = (stage: "submit" | "success" | "error", payload?: Record<string, unknown>) => {
   try {
@@ -93,7 +94,16 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
               _template: "table",
             };
 
-            persistQuoteLog("submit", payload);
+            const logEntry = {
+              timestamp: new Date().toISOString(),
+              subject: payload.subject,
+              name: payload.name,
+              email: payload.email,
+              details: payload.message,
+            };
+
+            persistQuoteLog("submit", logEntry);
+            void logQuoteToSheet({ ...logEntry, stage: "submit" });
             setStatus("sending");
             setMessage("");
 
@@ -111,7 +121,8 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
                 throw new Error("Error enviando cotización");
               }
 
-              persistQuoteLog("success", payload);
+              persistQuoteLog("success", logEntry);
+              void logQuoteToSheet({ ...logEntry, stage: "success" });
               setStatus("success");
               setMessage("Tu solicitud ha sido enviada. Nos comunicaremos pronto.");
               resetFields();
@@ -120,10 +131,10 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
                 closeWithAnimation();
               }, 3000);
             } catch (error) {
-              persistQuoteLog("error", {
-                error: error instanceof Error ? error.message : "No se pudo enviar la solicitud",
-                payload,
-              });
+              const errorMessage =
+                error instanceof Error ? error.message : "No se pudo enviar la solicitud";
+              persistQuoteLog("error", { ...logEntry, error: errorMessage });
+              void logQuoteToSheet({ ...logEntry, stage: "error", error: errorMessage });
               setStatus("error");
               setMessage(
                 error instanceof Error
