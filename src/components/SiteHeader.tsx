@@ -59,7 +59,9 @@ export function SiteHeader() {
             <span className="text-base">💬</span>
             WhatsApp
           </a>
-          <ThemeToggle />
+          <div className="hidden md:block">
+            <ThemeToggle />
+          </div>
           <MobileMenu />
         </div>
       </div>
