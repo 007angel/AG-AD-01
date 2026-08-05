@@ -5,10 +5,12 @@ import { ContactSection } from "../components/ContactSection";
 import { CompanyValues } from "../components/CompanyValues";
 import { FloatingActions } from "../components/FloatingActions";
 import { MissionVision } from "../components/MissionVision";
+import { NewsSection } from "../components/NewsSection";
 import { QuoteForm } from "../components/QuoteForm";
 import { ServiceCarousel } from "../components/ServiceCarousel";
 import { WhyChooseUs } from "../components/WhyChooseUs";
 import { useTheme } from "../hooks/useTheme";
+import { companyInfo } from "../lib/content";
 import { getThemeStyles } from "../lib/theme";
 
 export default function Home() {
@@ -51,6 +53,9 @@ export default function Home() {
                 Acompañamos importaciones, exportaciones y operaciones logísticas con
                 cumplimiento, agilidad y asesoría estratégica.
               </p>
+              <div className={`mt-6 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold ${themeStyles.pill}`}>
+                🏆 Más de {companyInfo.yearsOfExperience} años de experiencia
+              </div>
             </div>
           </div>
         </header>
@@ -58,6 +63,7 @@ export default function Home() {
         <ServiceCarousel isDarkMode={isDarkMode} />
         <WhyChooseUs isDarkMode={isDarkMode} />
         <CompanyValues isDarkMode={isDarkMode} />
+        <NewsSection isDarkMode={isDarkMode} />
         <MissionVision isDarkMode={isDarkMode} />
         <ContactSection onOpenQuote={() => setShowQuoteForm(true)} />
       </section>

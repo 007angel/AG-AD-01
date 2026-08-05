@@ -72,3 +72,62 @@ export const defaultServiceBoxes: ServiceBox[] = [
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
   },
 ];
+
+export type CompanyInfo = {
+  /** Edita aquí los datos de la empresa. */
+  yearsOfExperience: string;
+  phone: string;
+  phoneRaw: string;
+  email: string;
+  whatsappText: string;
+  address: string;
+  hours: string;
+  socials: {
+    facebook: string;
+    instagram: string;
+    linkedin: string;
+  };
+};
+
+export const companyInfo: CompanyInfo = {
+  yearsOfExperience: "15",
+  phone: "+504 3289-0454",
+  phoneRaw: "+50432890454",
+  email: "gerenciageneral@agenciaaduaneralya.com",
+  whatsappText:
+    "Hola, me gustaría solicitar una cotización para mis operaciones de comercio exterior.",
+  address: "Tegucigalpa, Honduras",
+  hours: "Lunes a viernes: 8:00 AM – 5:00 PM",
+  socials: {
+    facebook: "https://facebook.com/",
+    instagram: "https://instagram.com/",
+    linkedin: "https://linkedin.com/",
+  },
+};
+
+export type NewsItem = {
+  title: string;
+  date: string;
+  excerpt: string;
+};
+
+/** Edita aquí las noticias o avisos que quieras mostrar. */
+export const news: NewsItem[] = [
+  {
+    title: "Recordatorio a los importadores",
+    date: "3 ago 2026",
+    excerpt:
+      "Recuerda mantener al día la documentación de tus operaciones para evitar demoras en los despachos.",
+  },
+  {
+    title: "Nuevas regulaciones aduaneras",
+    date: "21 jul 2026",
+    excerpt:
+      "Informamos sobre las actualizaciones normativas vigentes para importaciones y exportaciones.",
+  },
+  {
+    title: "Horario de atención",
+    date: "1 jul 2026",
+    excerpt: "Atendemos de lunes a viernes de 8:00 AM a 5:00 PM para tu comodidad.",
+  },
+];
