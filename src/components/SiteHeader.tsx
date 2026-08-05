@@ -48,7 +48,17 @@ export function SiteHeader() {
           </a>
         </nav>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3">
+          <a
+            href="https://wa.me/+50432890454?text=Hola%2C%20me%20gustar%C3%ADa%20solicitar%20una%20cotizaci%C3%B3n%20para%20mis%20operaciones%20de%20comercio%20exterior."
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Contactar por WhatsApp"
+            className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400 md:hidden"
+          >
+            <span className="text-base">💬</span>
+            WhatsApp
+          </a>
           <ThemeToggle />
           <MobileMenu />
         </div>
