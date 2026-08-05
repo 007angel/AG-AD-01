@@ -22,6 +22,12 @@ export function MobileMenu() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  useEffect(() => {
+    if (!isOpen) return;
+    const timer = window.setTimeout(() => setIsOpen(false), 2000);
+    return () => window.clearTimeout(timer);
+  }, [isOpen]);
+
   return (
     <div className="relative md:hidden">
       <button
