@@ -125,9 +125,4 @@ export const news: NewsItem[] = [
     excerpt:
       "Informamos sobre las actualizaciones normativas vigentes para importaciones y exportaciones.",
   },
-  {
-    title: "Horario de atención",
-    date: "1 jul 2026",
-    excerpt: "Atendemos de lunes a viernes de 8:00 AM a 5:00 PM para tu comodidad.",
-  },
 ];
