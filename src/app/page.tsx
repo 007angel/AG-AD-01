@@ -57,8 +57,8 @@ export default function Home() {
 
         <ServiceCarousel isDarkMode={isDarkMode} />
         <WhyChooseUs isDarkMode={isDarkMode} />
-        <MissionVision isDarkMode={isDarkMode} />
         <CompanyValues isDarkMode={isDarkMode} />
+        <MissionVision isDarkMode={isDarkMode} />
         <ContactSection onOpenQuote={() => setShowQuoteForm(true)} />
       </section>
 
