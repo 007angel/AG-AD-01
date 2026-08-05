@@ -1,13 +1,19 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 import { defaultServiceBoxes } from "../lib/content";
 import { getThemeStyles } from "../lib/theme";
 
 export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [bgSrc, setBgSrc] = useState(defaultServiceBoxes[0].localImage);
   const themeStyles = getThemeStyles(isDarkMode);
   const active = defaultServiceBoxes[activeIndex];
+
+  useEffect(() => {
+    setBgSrc(active.localImage);
+  }, [activeIndex]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -27,14 +33,15 @@ export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
       </div>
 
       <div className="mt-8 lg:mt-10">
-        <div
-          className={themeStyles.serviceCardWrapper}
-          style={{
-            backgroundImage: `url(${active.image})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
+        <div className={themeStyles.serviceCardWrapper}>
+          <Image
+            src={bgSrc}
+            alt={active.title}
+            fill
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="object-cover"
+            onError={() => setBgSrc(active.image)}
+          />
           <div className={themeStyles.serviceOverlay} />
           <div className="relative flex min-h-[420px] flex-col justify-between gap-6 p-8 text-white transition-all duration-700 ease-out lg:p-10">
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
