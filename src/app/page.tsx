@@ -2,10 +2,11 @@
 
 import { useState } from "react";
 import { ContactSection } from "../components/ContactSection";
+import { CompanyValues } from "../components/CompanyValues";
 import { FloatingActions } from "../components/FloatingActions";
+import { MissionVision } from "../components/MissionVision";
 import { QuoteForm } from "../components/QuoteForm";
 import { ServiceCarousel } from "../components/ServiceCarousel";
-import { ServiceHighlights } from "../components/ServiceHighlights";
 import { WhyChooseUs } from "../components/WhyChooseUs";
 import { useTheme } from "../hooks/useTheme";
 import { getThemeStyles } from "../lib/theme";
@@ -52,12 +53,12 @@ export default function Home() {
               </p>
             </div>
           </div>
-
-          <ServiceHighlights isDarkMode={isDarkMode} />
         </header>
 
         <ServiceCarousel isDarkMode={isDarkMode} />
-        <WhyChooseUs />
+        <WhyChooseUs isDarkMode={isDarkMode} />
+        <MissionVision isDarkMode={isDarkMode} />
+        <CompanyValues isDarkMode={isDarkMode} />
         <ContactSection onOpenQuote={() => setShowQuoteForm(true)} />
       </section>
 

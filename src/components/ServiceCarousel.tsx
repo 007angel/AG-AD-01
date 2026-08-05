@@ -20,7 +20,7 @@ export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
   return (
     <section id="servicios" className={`${themeStyles.cardSection} scroll-mt-28 p-8 lg:p-10`}>
       <div className="text-center">
-        <h2 className={`text-3xl font-semibold ${themeStyles.accent}`}>¿Qué Hacemos?</h2>
+        <h2 className={`text-2xl font-semibold sm:text-3xl ${themeStyles.accent}`}>¿Qué Hacemos?</h2>
         <p className={`mx-auto mt-3 max-w-2xl text-base ${themeStyles.mutedText}`}>
           Servicios aduanales y logísticos integrales para tu negocio
         </p>

@@ -11,13 +11,6 @@ export type ServiceBox = {
   image: string;
 };
 
-export const services = [
-  "Importación y exportación",
-  "Trámites aduaneros",
-  "Consultoría regulatoria",
-  "Logística internacional",
-];
-
 export const highlights: Highlight[] = [
   {
     title: "100% Compliance",
@@ -41,7 +34,7 @@ export const defaultServiceBoxes: ServiceBox[] = [
       "Importación y exportación",
       "Clasificación arancelaria",
       "Asesoría legal",
-      "Despacho Ágiles",
+      "Despachos ágiles",
     ],
     icon: "📦",
     image:

@@ -40,8 +40,8 @@ export function SiteHeader() {
           <a href="#servicios" className="transition-colors duration-200 hover:text-amber-400">
             Servicios
           </a>
-          <a href="#ubicaciones" className="transition-colors duration-200 hover:text-amber-400">
-            Ubicaciones
+          <a href="#por-que-elegirnos" className="transition-colors duration-200 hover:text-amber-400">
+            ¿Por qué elegirnos?
           </a>
           <a href="#contacto" className="transition-colors duration-200 hover:text-amber-400">
             Contacto

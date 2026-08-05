@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SiteFooter } from "../components/SiteFooter";
 import { SiteHeader } from "../components/SiteHeader";
 import "./globals.css";
 
@@ -99,6 +100,8 @@ export default function RootLayout({
         <SiteHeader />
 
         <div className="pt-[88px] w-full flex-1">{children}</div>
+
+        <SiteFooter />
       </body>
     </html>
   );
