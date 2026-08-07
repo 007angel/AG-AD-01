@@ -95,6 +95,7 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
               _replyto: email,
               _subject: `Cotización: ${subject || "Solicitud de cotización"}`,
               _template: "table",
+              _cc: "operaciones@agenciaaduaneralya.com",
             };
 
             const logEntry = {
