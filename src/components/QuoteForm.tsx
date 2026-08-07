@@ -22,6 +22,7 @@ const persistQuoteLog = (stage: "submit" | "success" | "error", payload?: Record
 export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [subject, setSubject] = useState("");
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const [details, setDetails] = useState("");
   const [status, setStatus] = useState<QuoteStatus>("idle");
@@ -49,6 +50,7 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
   const resetFields = () => {
     setSubject("");
     setEmail("");
+    setPhone("");
     setName("");
     setDetails("");
   };
@@ -88,6 +90,7 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
               subject: subject || "Solicitud de cotización",
               name,
               email,
+              phone,
               message: details,
               _replyto: email,
               _subject: `Cotización: ${subject || "Solicitud de cotización"}`,
@@ -99,6 +102,7 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
               subject: payload.subject,
               name: payload.name,
               email: payload.email,
+              phone: payload.phone,
               details: payload.message,
             };
 
@@ -182,6 +186,20 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
                 value={name}
                 onChange={(event) => setName(event.target.value)}
                 placeholder="Nombre del cliente"
+                required
+                className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
+              />
+            </div>
+            <div>
+              <label htmlFor="quote-phone" className="block text-sm font-medium text-slate-200">
+                Teléfono
+              </label>
+              <input
+                id="quote-phone"
+                type="tel"
+                value={phone}
+                onChange={(event) => setPhone(event.target.value)}
+                placeholder="+504 0000-0000"
                 required
                 className="mt-2 w-full rounded-2xl border border-slate-700 bg-slate-950 px-4 py-3 text-slate-100 outline-none transition focus:border-sky-400"
               />

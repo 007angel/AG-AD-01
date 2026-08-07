@@ -96,7 +96,7 @@ export const companyInfo: CompanyInfo = {
   email: "gerenciageneral@agenciaaduaneralya.com",
   whatsappText:
     "Hola, me gustaría solicitar una cotización para mis operaciones de comercio exterior.",
-  address: "Tegucigalpa, Honduras",
+  address: "San Pedro Sula, Honduras",
   hours: "Lunes a viernes: 8:00 AM – 5:00 PM",
   socials: {
     facebook: "https://facebook.com/",

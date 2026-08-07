@@ -4,6 +4,7 @@ export type QuoteLogEntry = {
   subject?: string;
   name?: string;
   email?: string;
+  phone?: string;
   details?: string;
   error?: string;
 };
