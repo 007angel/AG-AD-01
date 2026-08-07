@@ -5,7 +5,7 @@ import { logQuoteToSheet } from "../lib/quoteLog";
 
 type QuoteStatus = "idle" | "sending" | "success" | "error";
 
-const FORM_SUBMIT_URL = "https://formsubmit.co/gerenciageneral@agenciaaduaneralya.com";
+const FORM_SUBMIT_URL = "https://formsubmit.co/ajax/gerenciageneral@agenciaaduaneralya.com";
 
 const persistQuoteLog = (stage: "submit" | "success" | "error", payload?: Record<string, unknown>) => {
   try {
