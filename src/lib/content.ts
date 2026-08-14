@@ -67,7 +67,7 @@ export const defaultServiceBoxes: ServiceBox[] = [
     description: "Consultoría en comercio exterior y gestión de permisos especiales.",
     points: ["Consultoría aduanera", "Gestión de permisos", "Defensa legal", "Cumplimiento normativo"],
     icon: "⚖️",
-    localImage: "/fotos/asesoria-tramites.jpg",
+    localImage: "/fotos/asesoria-tramites.jpeg",
     image:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
   },

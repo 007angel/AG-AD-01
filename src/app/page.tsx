@@ -10,7 +10,6 @@ import { QuoteForm } from "../components/QuoteForm";
 import { ServiceCarousel } from "../components/ServiceCarousel";
 import { WhyChooseUs } from "../components/WhyChooseUs";
 import { useTheme } from "../hooks/useTheme";
-import { companyInfo } from "../lib/content";
 import { getThemeStyles } from "../lib/theme";
 
 export default function Home() {
