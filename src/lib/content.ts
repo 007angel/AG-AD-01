@@ -97,11 +97,11 @@ export const companyInfo: CompanyInfo = {
   whatsappText:
     "Hola, me gustaría solicitar una cotización para mis operaciones de comercio exterior.",
   address: "San Pedro Sula, Honduras",
-  hours: "Lunes a viernes: 8:00 AM – 5:00 PM",
+  hours: "Lunes a viernes: 8:00 AM – 5:00 PM - Sábados: 8:00 AM – 12:00 PM",
   socials: {
     facebook: "https://facebook.com/",
     instagram: "https://instagram.com/",
-    linkedin: "https://linkedin.com/",
+    linkedin: "www.linkedin.com/in/agencia-aduanera-lya-a7b740429",
   },
 };
 
