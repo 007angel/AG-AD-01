@@ -100,8 +100,8 @@ export const companyInfo: CompanyInfo = {
   hours: "Lunes a viernes: 8:00 AM – 5:00 PM - Sábados: 8:00 AM – 12:00 PM",
   socials: {
     facebook: "https://facebook.com/",
-    instagram: "https://instagram.com/",
-    linkedin: "www.linkedin.com/in/agencia-aduanera-lya-a7b740429",
+    instagram: "https://www.instagram.com/agenciaaduaneralya?utm_source=qr&igsh=cXhiMmJ5dXI1dHB4",
+    linkedin: "https://www.linkedin.com/in/agencia-aduanera-lya-a7b740429",
   },
 };
 
