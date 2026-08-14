@@ -54,7 +54,7 @@ export default function Home() {
                 cumplimiento, agilidad y asesoría estratégica.
               </p>
               <div className={`mt-6 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold ${themeStyles.pill}`}>
-                🏆 Más de {companyInfo.yearsOfExperience} años de experiencia
+             {/*    🏆 Más de {companyInfo.yearsOfExperience} años de experiencia */}
               </div>
             </div>
           </div>
