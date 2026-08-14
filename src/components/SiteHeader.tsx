@@ -28,7 +28,7 @@ export function SiteHeader() {
             alt="Agencia Aduanera L & A"
             width={64}
             height={64}
-            className="h-14 w-auto object-contain md:h-16"
+            className="h-20 w-auto object-contain md:h-24"
             style={{ filter: "drop-shadow(0 0 6px rgba(15, 23, 42, 0.35))" }}
           />
         </a>
