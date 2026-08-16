@@ -99,7 +99,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <SiteHeader />
 
-        <div className="pt-[88px] w-full flex-1">{children}</div>
+        <div className="pt-28 w-full flex-1 md:pt-32">{children}</div>
 
         <SiteFooter />
       </body>

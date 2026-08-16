@@ -14,7 +14,7 @@ export function SiteHeader() {
         isDarkMode ? "bg-slate-950/30 text-white" : "bg-white/30 text-slate-900"
       }`}
     >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+      <div className="mx-auto flex h-28 max-w-7xl items-center justify-between px-6 md:h-32">
         <a
           href="#inicio"
           className={`flex items-center rounded-2xl border px-3 py-2 shadow-sm ring-1 ${

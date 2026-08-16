@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ContactSection } from "../components/ContactSection";
 import { CompanyValues } from "../components/CompanyValues";
 import { FloatingActions } from "../components/FloatingActions";
+import { HeroVideo } from "../components/HeroVideo";
 import { MissionVision } from "../components/MissionVision";
 import { NewsSection } from "../components/NewsSection";
 import { QuoteForm } from "../components/QuoteForm";
@@ -33,9 +34,10 @@ export default function Home() {
         <div className={`absolute inset-0 ${isDarkMode ? "bg-slate-950/65" : "bg-white"}`} />
       </div>
 
+      <HeroVideo />
+
       <section className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 lg:px-8 lg:py-16">
         <header
-          id="inicio"
           className={`${themeStyles.cardSection} mx-auto flex w-full max-w-[1600px] scroll-mt-28 flex-col gap-8 p-8 lg:p-10`}
         >
           <div className="flex justify-center">
@@ -52,9 +54,9 @@ export default function Home() {
                 Acompañamos importaciones, exportaciones y operaciones logísticas con
                 cumplimiento, agilidad y asesoría estratégica.
               </p>
-              <div className={`mt-6 inline-flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold ${themeStyles.pill}`}>
-             {/*    🏆 Más de {companyInfo.yearsOfExperience} años de experiencia */}
-              </div>
+              
+          
+              
             </div>
           </div>
         </header>
