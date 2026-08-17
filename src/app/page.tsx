@@ -13,13 +13,6 @@ import { WhyChooseUs } from "../components/WhyChooseUs";
 import { useTheme } from "../hooks/useTheme";
 import { getThemeStyles } from "../lib/theme";
 import { companyInfo } from "../lib/content";
-import { IconScale, IconGlobe, IconCheck } from "../lib/icons";
-
-const stats = [
-  { Icon: IconScale, value: `${companyInfo.yearsOfExperience}+`, label: "Años de experiencia" },
-  { Icon: IconGlobe, value: "12", label: "Aduanas en Honduras" },
-  { Icon: IconCheck, value: "100%", label: "Cumplimiento normativo" },
-];
 
 const WHATSAPP_URL = `https://wa.me/${companyInfo.phoneRaw}?text=${encodeURIComponent(companyInfo.whatsappText)}`;
 
@@ -76,20 +69,6 @@ export default function Home() {
             >
               Contactar por WhatsApp
             </a>
-          </div>
-
-          <div className={`grid w-full max-w-lg grid-cols-3 gap-4 pt-6 border-t ${isDarkMode ? "border-slate-700/50" : "border-slate-200"}`}>
-            {stats.map(({ Icon, value, label }) => (
-              <div key={label} className="flex flex-col items-center gap-1 text-center">
-                <Icon className={`h-5 w-5 ${isDarkMode ? "text-sky-400" : "text-sky-600"}`} />
-                <span className={`text-xl font-bold sm:text-2xl ${isDarkMode ? "text-slate-100" : "text-slate-950"}`}>
-                  {value}
-                </span>
-                <span className={`text-xs leading-tight ${themeStyles.mutedText}`}>
-                  {label}
-                </span>
-              </div>
-            ))}
           </div>
         </header>
 
