@@ -31,6 +31,7 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
 
   const closeTimerRef = useRef<number | null>(null);
   const successTimerRef = useRef<number | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     return () => {
@@ -39,21 +40,39 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
     };
   }, []);
 
-  const closeWithAnimation = useCallback(() => {
-    setIsClosing(true);
-    closeTimerRef.current = window.setTimeout(() => {
-      onClose();
-      setIsClosing(false);
-    }, 300);
-  }, [onClose]);
+  useEffect(() => {
+    if (!open) return;
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeWithAnimation();
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
+  }, [open]);
 
-  const resetFields = () => {
+  useEffect(() => {
+    if (open && dialogRef.current) {
+      dialogRef.current.focus();
+    }
+  }, [open]);
+
+  const resetFields = useCallback(() => {
     setSubject("");
     setEmail("");
     setPhone("");
     setName("");
     setDetails("");
-  };
+    setStatus("idle");
+    setMessage("");
+  }, []);
+
+  const closeWithAnimation = useCallback(() => {
+    setIsClosing(true);
+    closeTimerRef.current = window.setTimeout(() => {
+      onClose();
+      setIsClosing(false);
+      resetFields();
+    }, 300);
+  }, [onClose, resetFields]);
 
   if (!open) return null;
 
@@ -62,9 +81,17 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
       className={`fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 py-6 transition-opacity duration-300 sm:px-6 ${
         isClosing ? "opacity-0" : "opacity-100"
       }`}
+      onClick={(e) => {
+        if (e.target === e.currentTarget) closeWithAnimation();
+      }}
     >
       <div
-        className={`w-full max-w-2xl rounded-3xl bg-slate-900 p-6 text-slate-100 shadow-2xl shadow-slate-950/60 transition-all duration-300 ${
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Formulario de cotización"
+        tabIndex={-1}
+        className={`w-full max-w-2xl rounded-3xl bg-slate-900 p-6 text-slate-100 shadow-2xl shadow-slate-950/60 transition-all duration-300 outline-none ${
           isClosing ? "translate-y-4 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"
         }`}
       >
@@ -77,6 +104,7 @@ export function QuoteForm({ open, onClose }: { open: boolean; onClose: () => voi
           </div>
           <button
             onClick={closeWithAnimation}
+            aria-label="Cerrar formulario"
             className="absolute right-0 top-0 rounded-full bg-slate-800 px-3 py-2 text-sm text-slate-200 transition hover:bg-slate-700"
           >
             Cerrar

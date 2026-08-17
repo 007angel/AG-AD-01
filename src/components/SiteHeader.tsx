@@ -4,6 +4,7 @@ import Image from "next/image";
 import { useTheme } from "../hooks/useTheme";
 import { MobileMenu } from "./MobileMenu";
 import { ThemeToggle } from "./ThemeToggle";
+import { IconMessage } from "../lib/icons";
 
 export function SiteHeader() {
   const { isDarkMode } = useTheme();
@@ -56,7 +57,7 @@ export function SiteHeader() {
             aria-label="Contactar por WhatsApp"
             className="inline-flex items-center gap-2 rounded-full bg-emerald-500 px-3 py-2 text-sm font-semibold text-white shadow-lg shadow-emerald-500/30 transition hover:bg-emerald-400 md:hidden"
           >
-            <span className="text-base">💬</span>
+            <IconMessage className="h-5 w-5" />
             WhatsApp
           </a>
           <div className="hidden md:block">

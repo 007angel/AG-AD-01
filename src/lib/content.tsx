@@ -1,3 +1,6 @@
+import type { ReactNode } from "react";
+import { IconBox, IconGlobe, IconMapPin, IconScale } from "./icons";
+
 export type Highlight = {
   title: string;
   text: string;
@@ -7,7 +10,7 @@ export type ServiceBox = {
   title: string;
   description: string;
   points: string[];
-  icon: string;
+  icon: ReactNode;
   /** Foto local en public/fotos (coloca el archivo con este nombre para usarla). */
   localImage: string;
   /** Foto de respaldo si no existe la local. */
@@ -39,7 +42,7 @@ export const defaultServiceBoxes: ServiceBox[] = [
       "Asesoría legal",
       "Despachos ágiles",
     ],
-    icon: "📦",
+    icon: <IconBox className="text-3xl" />,
     localImage: "/fotos/agencia-aduanal.jpg",
     image:
       "https://images.unsplash.com/photo-1517677208171-0bc6725a3e60?auto=format&fit=crop&w=800&q=80",
@@ -48,7 +51,7 @@ export const defaultServiceBoxes: ServiceBox[] = [
     title: "Logística Internacional",
     description: "Transporte aéreo, marítimo y terrestre con seguro de mercancías incluido.",
     points: ["Transporte aéreo", "Transporte marítimo", "Seguro de carga", "Rastreo en tiempo real"],
-    icon: "🌍",
+    icon: <IconGlobe className="text-3xl" />,
     localImage: "/fotos/logistica-internacional.jpg",
     image:
       "https://images.unsplash.com/photo-1517502166878-35c93a0072bb?auto=format&fit=crop&w=800&q=80",
@@ -57,7 +60,7 @@ export const defaultServiceBoxes: ServiceBox[] = [
     title: "Gestión de Carga",
     description: "Almacenaje, consolidación y embalaje profesional de tu mercancía.",
     points: ["Almacenaje seguro", "Consolidación de carga", "Embalaje profesional"],
-    icon: "📍",
+    icon: <IconMapPin className="text-3xl" />,
     localImage: "/fotos/gestion-carga.jpg",
     image:
       "https://images.unsplash.com/photo-1509021436665-8f07dbf5bf1d?auto=format&fit=crop&w=800&q=80",
@@ -66,7 +69,7 @@ export const defaultServiceBoxes: ServiceBox[] = [
     title: "Asesoría y Trámites",
     description: "Consultoría en comercio exterior y gestión de permisos especiales.",
     points: ["Consultoría aduanera", "Gestión de permisos", "Defensa legal", "Cumplimiento normativo"],
-    icon: "⚖️",
+    icon: <IconScale className="text-3xl" />,
     localImage: "/fotos/asesoria-tramites.jpeg",
     image:
       "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=800&q=80",
