@@ -84,9 +84,6 @@ export const metadata: Metadata = {
       "Importación, exportación, trámites aduaneros, transporte marítimo, carga aérea y logística internacional en Honduras.",
     images: ["https://agenciaaduaneralya.com/logopre.png"],
   },
-  other: {
-    "fb:app_id": "TU_FACEBOOK_APP_ID",
-  },
 };
 
 export default function RootLayout({

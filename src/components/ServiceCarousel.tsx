@@ -1,30 +1,60 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { defaultServiceBoxes } from "../lib/content";
 import { getThemeStyles } from "../lib/theme";
+import { IconCheck, IconMapPin } from "../lib/icons";
+
+const locations = [
+  "Tegucigalpa Oficina Principal",
+  "Toncontín",
+  "San Pedro Sula",
+  "Puerto Cortés",
+  "San Lorenzo",
+  "Las Manos (Frontera Honduras – Nicaragua)",
+  "Guasaule (Frontera Honduras – Nicaragua)",
+  "El Poy (Frontera Honduras – Guatemala)",
+  "El Florido (Frontera Honduras – Guatemala)",
+  "Corinto (Frontera Honduras – Guatemala)",
+  "Agua Caliente (Frontera Honduras – Guatemala)",
+  "El Amatillo (Frontera Honduras – El Salvador)",
+];
 
 export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [bgSrc, setBgSrc] = useState(defaultServiceBoxes[0].localImage);
+  const [isPaused, setIsPaused] = useState(false);
+  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const themeStyles = getThemeStyles(isDarkMode);
   const active = defaultServiceBoxes[activeIndex];
 
   useEffect(() => {
     setBgSrc(active.localImage);
-  }, [activeIndex]);
+  }, [activeIndex, active.localImage]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    if (isPaused) return;
+    intervalRef.current = setInterval(() => {
       setActiveIndex((current) => (current + 1) % defaultServiceBoxes.length);
     }, 5000);
+    return () => {
+      if (intervalRef.current) clearInterval(intervalRef.current);
+    };
+  }, [isPaused]);
 
-    return () => clearInterval(interval);
-  }, []);
+  const goTo = (index: number) => {
+    setActiveIndex(index);
+    if (intervalRef.current) clearInterval(intervalRef.current);
+  };
 
   return (
-    <section id="servicios" className={`${themeStyles.cardSection} scroll-mt-28 p-8 lg:p-10`}>
+    <section
+      id="servicios"
+      className={`${themeStyles.cardSection} scroll-mt-28 p-8 lg:p-10`}
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="text-center">
         <h2 className={`text-2xl font-semibold sm:text-3xl ${themeStyles.accent}`}>¿Qué Hacemos?</h2>
         <p className={`mx-auto mt-3 max-w-2xl text-base ${themeStyles.mutedText}`}>
@@ -60,7 +90,7 @@ export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
                 {defaultServiceBoxes.map((_, index) => (
                   <button
                     key={index}
-                    onClick={() => setActiveIndex(index)}
+                    onClick={() => goTo(index)}
                     className={`h-3 w-3 rounded-full border border-white/40 transition ${
                       index === activeIndex ? "bg-white" : "bg-white/30 hover:bg-white/60"
                     }`}
@@ -73,12 +103,33 @@ export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
             <ul className="space-y-3 rounded-2xl border border-white/15 bg-white/10 p-4 text-sm shadow-lg shadow-slate-950/20 backdrop-blur-sm md:max-w-md">
               {active.points.map((point) => (
                 <li key={point} className="flex items-start gap-3 text-slate-100">
-                  <span className="mt-1 text-sky-300">✓</span>
+                  <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" />
                   <span>{point}</span>
                 </li>
               ))}
             </ul>
           </div>
+        </div>
+      </div>
+
+      <div className="mt-10">
+        <p className={`text-center text-sm font-semibold uppercase tracking-wider ${themeStyles.mutedText}`}>
+          Presencia nacional
+        </p>
+        <div className="mt-5 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+          {locations.map((loc) => (
+            <div
+              key={loc}
+              className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-sm transition-colors ${
+                isDarkMode
+                  ? "border-slate-700/60 bg-slate-800/60 text-slate-200"
+                  : "border-slate-200 bg-white/80 text-slate-700"
+              }`}
+            >
+              <IconMapPin className="h-5 w-5 flex-shrink-0 text-sky-500" />
+              <span>{loc}</span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

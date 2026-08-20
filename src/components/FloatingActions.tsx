@@ -1,3 +1,5 @@
+import { IconMessage } from "../lib/icons";
+
 const WHATSAPP_URL = `https://wa.me/+50432890454?text=${encodeURIComponent(
   "Hola, me gustaría solicitar una cotización para mis operaciones de comercio exterior."
 )}`;
@@ -18,7 +20,7 @@ export function FloatingActions({ onOpenQuote }: { onOpenQuote: () => void }) {
         rel="noreferrer"
         className="fixed right-6 z-50 hidden md:inline-flex items-center gap-3 rounded-full bg-emerald-500 px-4 py-3 text-sm font-semibold text-white shadow-xl shadow-emerald-500/30 transition hover:bg-emerald-400 bottom-[max(1.5rem,env(safe-area-inset-bottom))]"
       >
-        <span className="text-lg">💬</span>
+        <IconMessage className="h-5 w-5" />
         WhatsApp
       </a>
     </>

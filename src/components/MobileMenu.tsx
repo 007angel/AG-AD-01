@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useTheme } from "../hooks/useTheme";
+import { IconMenu, IconSun, IconMoon } from "../lib/icons";
 
 const links = [
   { href: "#inicio", label: "Inicio" },
@@ -24,8 +25,11 @@ export function MobileMenu() {
 
   useEffect(() => {
     if (!isOpen) return;
-    const timer = window.setTimeout(() => setIsOpen(false), 2000);
-    return () => window.clearTimeout(timer);
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsOpen(false);
+    };
+    document.addEventListener("keydown", handleKey);
+    return () => document.removeEventListener("keydown", handleKey);
   }, [isOpen]);
 
   return (
@@ -39,7 +43,7 @@ export function MobileMenu() {
           isDarkMode ? "border-slate-700 text-slate-100" : "border-slate-300 bg-white/50 text-slate-900"
         }`}
       >
-        ☰
+        <IconMenu className="h-5 w-5" />
       </button>
       {isOpen && (
         <div
@@ -67,11 +71,10 @@ export function MobileMenu() {
             }`}
           >
             <span>{isDarkMode ? "Modo claro" : "Modo oscuro"}</span>
-            <span>{isDarkMode ? "☀️" : "🌙"}</span>
+            <span>{isDarkMode ? <IconSun className="h-5 w-5" /> : <IconMoon className="h-5 w-5" />}</span>
           </button>
         </div>
       )}
     </div>
   );
 }
-

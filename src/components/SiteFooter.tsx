@@ -3,11 +3,12 @@
 import Image from "next/image";
 import { companyInfo } from "../lib/content";
 import { useTheme } from "../hooks/useTheme";
+import { IconMapPin, IconPhone, IconMail, IconClock, IconFacebook, IconInstagram, IconLinkedin } from "../lib/icons";
 
 const socialIcons = [
-  { label: "Facebook", href: companyInfo.socials.facebook, icon: "f" },
-  { label: "Instagram", href: companyInfo.socials.instagram, icon: "◎" },
-  { label: "LinkedIn", href: companyInfo.socials.linkedin, icon: "in" },
+  { label: "Facebook", href: companyInfo.socials.facebook, Icon: IconFacebook },
+  { label: "Instagram", href: companyInfo.socials.instagram, Icon: IconInstagram },
+  { label: "LinkedIn", href: companyInfo.socials.linkedin, Icon: IconLinkedin },
 ];
 
 export function SiteFooter() {
@@ -46,11 +47,11 @@ export function SiteFooter() {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={social.label}
-                className={`flex h-9 w-9 items-center justify-center rounded-full border text-sm font-semibold transition-colors hover:border-amber-400 hover:text-amber-400 ${
+                className={`flex h-9 w-9 items-center justify-center rounded-full border transition-colors hover:border-amber-400 hover:text-amber-400 ${
                   isDarkMode ? "border-slate-700 text-slate-300" : "border-slate-300 text-slate-600"
                 }`}
               >
-                {social.icon}
+                <social.Icon className="h-4 w-4" />
               </a>
             ))}
           </div>
@@ -62,16 +63,16 @@ export function SiteFooter() {
           </h3>
           <ul className="mt-3 space-y-2 text-sm">
             <li>
-              <span className="text-amber-400">📍</span> {companyInfo.address}
+              <IconMapPin className="h-4 w-4 text-amber-400" /> {companyInfo.address}
             </li>
             <li>
               <a
-                href={`https://wa.me/${companyInfo.phoneRaw}`}
+                href={`https://wa.me/${companyInfo.phoneRaw}?text=${encodeURIComponent(companyInfo.whatsappText)}`}
                 target="_blank"
                 rel="noreferrer"
                 className="transition-colors hover:text-amber-400"
               >
-                📞 {companyInfo.phone}
+                <IconPhone className="h-4 w-4 inline-block mr-1" /> {companyInfo.phone}
               </a>
             </li>
             <li>
@@ -79,11 +80,11 @@ export function SiteFooter() {
                 href={`mailto:${companyInfo.email}`}
                 className="transition-colors hover:text-amber-400"
               >
-                ✉️ {companyInfo.email}
+                <IconMail className="h-4 w-4 inline-block mr-1" /> {companyInfo.email}
               </a>
             </li>
             <li>
-              <span className="text-amber-400">🕐</span> Horario de atención: {companyInfo.hours}
+              <IconClock className="h-4 w-4 text-amber-400" /> Horario de atención: {companyInfo.hours}
             </li>
           </ul>
         </div>
