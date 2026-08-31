@@ -1,15 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { defaultServiceBoxes } from "../lib/content";
 import { getThemeStyles } from "../lib/theme";
 import { IconCheck, IconMapPin } from "../lib/icons";
 
 const locations = [
-  "Tegucigalpa Oficina Principal",
+  "San Pedro Sula Oficina Principal",
+  "Tegucigalpa",
   "Toncontín",
-  "San Pedro Sula",
   "Puerto Cortés",
   "San Lorenzo",
   "Las Manos (Frontera Honduras – Nicaragua)",
@@ -22,39 +22,11 @@ const locations = [
 ];
 
 export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [bgSrc, setBgSrc] = useState(defaultServiceBoxes[0].localImage);
-  const [isPaused, setIsPaused] = useState(false);
-  const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const themeStyles = getThemeStyles(isDarkMode);
-  const active = defaultServiceBoxes[activeIndex];
-
-  useEffect(() => {
-    setBgSrc(active.localImage);
-  }, [activeIndex, active.localImage]);
-
-  useEffect(() => {
-    if (isPaused) return;
-    intervalRef.current = setInterval(() => {
-      setActiveIndex((current) => (current + 1) % defaultServiceBoxes.length);
-    }, 5000);
-    return () => {
-      if (intervalRef.current) clearInterval(intervalRef.current);
-    };
-  }, [isPaused]);
-
-  const goTo = (index: number) => {
-    setActiveIndex(index);
-    if (intervalRef.current) clearInterval(intervalRef.current);
-  };
+  const [failed, setFailed] = useState<Record<string, boolean>>({});
 
   return (
-    <section
-      id="servicios"
-      className={`${themeStyles.cardSection} scroll-mt-28 p-8 lg:p-10`}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
+    <section id="servicios" className={`${themeStyles.cardSection} scroll-mt-28 p-8 lg:p-10`}>
       <div className="text-center">
         <h2 className={`text-2xl font-semibold sm:text-3xl ${themeStyles.accent}`}>¿Qué Hacemos?</h2>
         <p className={`mx-auto mt-3 max-w-2xl text-base ${themeStyles.mutedText}`}>
@@ -62,54 +34,57 @@ export function ServiceCarousel({ isDarkMode }: { isDarkMode: boolean }) {
         </p>
       </div>
 
-      <div className="mt-8 lg:mt-10">
-        <div className={themeStyles.serviceCardWrapper}>
-          <Image
-            src={bgSrc}
-            alt={active.title}
-            fill
-            sizes="(max-width: 1280px) 100vw, 1280px"
-            className="object-cover"
-            onError={() => setBgSrc(active.image)}
-          />
-          <div className={themeStyles.serviceOverlay} />
-          <div className="relative flex min-h-[420px] flex-col justify-between gap-6 p-8 text-white transition-all duration-700 ease-out lg:p-10">
-            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-              <div className="flex items-center gap-4">
-                <div className="flex h-16 w-16 items-center justify-center rounded-3xl border border-white/20 bg-white/10 text-3xl shadow-sm backdrop-blur-sm">
-                  {active.icon}
+      <div className="mt-8 grid gap-6 md:grid-cols-2 lg:mt-10">
+        {defaultServiceBoxes.map((box) => (
+          <div
+            key={box.title}
+            className={`group relative overflow-hidden rounded-2xl border transition-all duration-300 ${
+              isDarkMode
+                ? "border-slate-700/60 shadow-lg shadow-slate-950/20"
+                : "border-slate-200 shadow-lg shadow-slate-950/5"
+            }`}
+          >
+            <div className="relative h-64 w-full overflow-hidden sm:h-72">
+              <Image
+                src={failed[box.title] ? box.image : box.localImage}
+                alt={box.title}
+                fill
+                sizes="(max-width: 768px) 100vw, 50vw"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
+                onError={() => setFailed((prev) => ({ ...prev, [box.title]: true }))}
+              />
+              <div
+                className={`absolute inset-0 ${
+                  isDarkMode
+                    ? "bg-gradient-to-t from-slate-950/95 via-slate-950/40 to-transparent"
+                    : "bg-gradient-to-t from-slate-900/90 via-slate-900/30 to-transparent"
+                }`}
+              />
+              <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 p-5">
+                <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/10 text-2xl shadow-sm backdrop-blur-sm">
+                  {box.icon}
                 </div>
                 <div>
-                  <h3 className="text-2xl font-semibold text-white">{active.title}</h3>
-                  <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-200">
-                    {active.description}
+                  <h3 className="text-xl font-semibold text-white lg:text-2xl">{box.title}</h3>
+                  <p className="mt-1 max-w-xl text-sm leading-6 text-slate-200">
+                    {box.description}
                   </p>
                 </div>
               </div>
-              <div className="flex items-center gap-2 text-sm text-slate-200">
-                {defaultServiceBoxes.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => goTo(index)}
-                    className={`h-3 w-3 rounded-full border border-white/40 transition ${
-                      index === activeIndex ? "bg-white" : "bg-white/30 hover:bg-white/60"
-                    }`}
-                    aria-label={`Mostrar servicio ${index + 1}`}
-                  />
-                ))}
-              </div>
             </div>
 
-            <ul className="space-y-3 rounded-2xl border border-white/15 bg-white/10 p-4 text-sm shadow-lg shadow-slate-950/20 backdrop-blur-sm md:max-w-md">
-              {active.points.map((point) => (
-                <li key={point} className="flex items-start gap-3 text-slate-100">
-                  <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" />
-                  <span>{point}</span>
-                </li>
-              ))}
-            </ul>
+            <div className={`px-5 py-5 ${isDarkMode ? "bg-slate-900/70" : "bg-white/90"}`}>
+              <ul className="space-y-2.5">
+                {box.points.map((point) => (
+                  <li key={point} className="flex items-start gap-3 text-sm">
+                    <IconCheck className="mt-0.5 h-4 w-4 flex-shrink-0 text-sky-300" />
+                    <span className={isDarkMode ? "text-slate-100" : "text-slate-800"}>{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
-        </div>
+        ))}
       </div>
 
       <div className="mt-10">

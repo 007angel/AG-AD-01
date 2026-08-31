@@ -29,7 +29,7 @@ export default function Home() {
 
       <HeroVideo />
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 lg:px-8 lg:py-16">
+      <section className="mx-auto flex max-w-screen-2xl flex-col gap-6 px-4 py-8 sm:px-6 lg:px-10 lg:py-16">
         <header className="mx-auto flex w-full max-w-4xl scroll-mt-28 flex-col items-center text-center gap-6">
           <div className="flex items-center gap-3">
             <span className={`h-px w-8 sm:w-12 ${isDarkMode ? "bg-sky-400/40" : "bg-sky-500/50"}`} />

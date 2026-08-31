@@ -84,7 +84,10 @@ export type CompanyInfo = {
   email: string;
   whatsappText: string;
   address: string;
-  hours: string;
+  hours: {
+    weekdays: string;
+    saturday: string;
+  };
   socials: {
     facebook: string;
     instagram: string;
@@ -100,7 +103,10 @@ export const companyInfo: CompanyInfo = {
   whatsappText:
     "Hola, me gustaría solicitar una cotización para mis operaciones de comercio exterior.",
   address: "San Pedro Sula, Honduras",
-  hours: "Lunes a Viernes: 8:00 AM – 5:00 PM - Sábados: 8:00 AM – 12:00 PM",
+  hours: {
+    weekdays: "Lunes a Viernes: 8:00 AM – 5:00 PM",
+    saturday: "Sábados: 8:00 AM – 12:00 PM",
+  },
   socials: {
     facebook: "https://facebook.com/",
     instagram: "https://www.instagram.com/agenciaaduaneralya?utm_source=qr&igsh=cXhiMmJ5dXI1dHB4",

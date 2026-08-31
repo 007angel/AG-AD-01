@@ -84,7 +84,14 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <IconClock className="h-4 w-4 text-amber-400" /> Horario de atención: {companyInfo.hours}
+              <div className="flex items-start gap-2">
+                <IconClock className="mt-0.5 h-4 w-4 flex-shrink-0 text-amber-400" />
+                <div className="flex flex-col gap-1">
+                  <span>Horario de atención:</span>
+                  <span>{companyInfo.hours.weekdays}</span>
+                  <span>{companyInfo.hours.saturday}</span>
+                </div>
+              </div>
             </li>
           </ul>
         </div>

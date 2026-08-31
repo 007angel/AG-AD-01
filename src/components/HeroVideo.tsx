@@ -1,11 +1,42 @@
 "use client";
 
 import Image from "next/image";
+import { useEffect, useRef } from "react";
 
 export function HeroVideo() {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const tryPlay = () => {
+      if (video.paused) {
+        const p = video.play();
+        if (p) {
+          p.catch(() => {
+            /* autoplay bloqueado (Safari/Mac) */
+          });
+        }
+      }
+    };
+
+    tryPlay();
+    video.addEventListener("loadedmetadata", tryPlay);
+    video.addEventListener("canplay", tryPlay);
+    document.addEventListener("touchstart", tryPlay, { once: true });
+
+    return () => {
+      video.removeEventListener("loadedmetadata", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
+      document.removeEventListener("touchstart", tryPlay);
+    };
+  }, []);
+
   return (
     <section id="inicio" className="relative w-full overflow-hidden">
       <video
+        ref={videoRef}
         src="/video/video-in-opt.mp4"
         poster="/video/poster.jpg"
         preload="auto"
