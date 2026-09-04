@@ -31,14 +31,14 @@ const groups: ServiceGroup[] = [
     name: "Despacho Aduanero De Importación",
     icon: <IconBox className="text-2xl" />,
     modalities: ["FCL", "FTL", "LCL", "LTL", "Aéreo"],
-    localImage: "/FotoCarousel/despacho-importacion.jpg",
+    localImage: "/fotos/despacho-importacion.jpg",
     image: "https://images.unsplash.com/photo-1578575437130-527eed3abbec?auto=format&fit=crop&w=600&q=80",
   },
   {
     name: "Despacho Aduanero De Exportación",
     icon: <IconUpload className="text-2xl" />,
     modalities: ["FCL", "FTL", "LCL", "LTL"],
-    localImage: "/FotoCarousel/despacho-exportacion.jpg",
+    localImage: "/fotos/gestion-carga.jpg",
     image: "https://images.unsplash.com/photo-1755428855454-56c364d2a808?auto=format&fit=crop&w=600&q=80",
   },
   {
@@ -59,7 +59,7 @@ const groups: ServiceGroup[] = [
     name: "Marchamo Nacional / Internacional",
     icon: <IconClipboard className="text-2xl" />,
     modalities: [],
-    localImage: "/FotoCarousel/marchamo.jpg",
+    localImage: "/fotos/marchamo.jpeg",
     image: "https://images.unsplash.com/photo-1583521214690-73421a1829a9?auto=format&fit=crop&w=600&q=80",
   },
   {
@@ -73,7 +73,7 @@ const groups: ServiceGroup[] = [
     name: "Declaración De Oficio",
     icon: <IconFile className="text-2xl" />,
     modalities: [],
-    localImage: "/FotoCarousel/declaracion-oficio.jpg",
+    localImage: "/fotos/asesoria-tramites.jpeg",
     image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=600&q=80",
   },
   {
@@ -87,7 +87,7 @@ const groups: ServiceGroup[] = [
     name: "Asesoría Logística",
     icon: <IconCompass className="text-2xl" />,
     modalities: [],
-    localImage: "/FotoCarousel/asesoria-logistica.jpg",
+    localImage: "/fotos/logistica-internacional.jpg",
     image: "https://images.unsplash.com/photo-1519992599773-1e1d4029929d?auto=format&fit=crop&w=600&q=80",
   },
   {
